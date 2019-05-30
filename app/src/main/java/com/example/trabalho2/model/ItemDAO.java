@@ -22,7 +22,7 @@ public class ItemDAO {
 
     public List<Item> GetAllItems() {
         List<Item> items = new ArrayList<>();
-        Cursor cursor = db.query("item", new String[]{"id", "name", "description"}, null, null, null, null, null);
+        Cursor cursor = db.query("item", new String[]{"id", "name", "description"}, null, null, null, null, "id DESC");
 
         while(cursor.moveToNext()){
             Item item = new Item();

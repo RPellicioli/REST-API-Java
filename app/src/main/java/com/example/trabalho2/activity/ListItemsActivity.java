@@ -60,7 +60,7 @@ public class ListItemsActivity extends AppCompatActivity {
 
         final Context _t = this;
         itemDAO = new ItemDAO(this);
-        ratingsDAO = new RatingsDAO(this);
+        //ratingsDAO = new RatingsDAO(this);
         listView = findViewById(R.id.items_list);
 
         if(VerifyConnection()){
@@ -83,6 +83,8 @@ public class ListItemsActivity extends AppCompatActivity {
                     startActivity(ia);
                 }
             });
+
+            Toast.makeText(getApplicationContext(), "Lista atualizada do banco local", Toast.LENGTH_LONG).show();
 
             //        registerForContextMenu(listView);
         }
@@ -168,7 +170,9 @@ public class ListItemsActivity extends AppCompatActivity {
 
     public void Sync(final Context context){
         itemDAO.Restart();
-        ratingsDAO.Restart();
+        //ratingsDAO.Restart();
+
+        Toast.makeText(getApplicationContext(), "Aguarde a lista atualizar", Toast.LENGTH_LONG).show();
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<DatumResponse> call = apiService.getItems(AUTH);
@@ -184,10 +188,10 @@ public class ListItemsActivity extends AppCompatActivity {
                     i.setDescription(datum.getItem().getDescription());
                     itemDAO.InsertItem(i);
 
-                    Ratings r = new Ratings();
-                    r.setTotalPoints(datum.getItem().getRatings().getTotalPoints());
-                    r.setItemId(i.getId());
-                    ratingsDAO.InsertRatings(r, r.getItemId());
+//                    Ratings r = new Ratings();
+//                    r.setTotalPoints(datum.getItem().getRatings().getTotalPoints());
+//                    r.setItemId(i.getId());
+//                    ratingsDAO.InsertRatings(r, r.getItemId());
                 }
 
                 items = itemDAO.GetAllItems();
@@ -206,6 +210,8 @@ public class ListItemsActivity extends AppCompatActivity {
                         startActivity(ia);
                     }
                 });
+
+                Toast.makeText(getApplicationContext(), "Lista atualizada da nuvem", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -222,8 +228,6 @@ public class ListItemsActivity extends AppCompatActivity {
         }
 
         Sync(this);
-
-        Toast.makeText(getApplicationContext(), "Lista atualizada da nuvem", Toast.LENGTH_LONG).show();
     }
 
     private boolean VerifyConnection(){

@@ -1,6 +1,7 @@
 package com.example.trabalho2.activity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +37,7 @@ public class FormItemActivity extends AppCompatActivity {
         ratingsDAO = new RatingsDAO(this);
         name = findViewById(R.id.editName);
         description = findViewById(R.id.editDescription);
-        totalPoints = findViewById(R.id.editTotalPoints);
+        //totalPoints = findViewById(R.id.editTotalPoints);
 
         Button deleteButton = (Button) findViewById(R.id.delete);
         deleteButton.setVisibility(View.GONE);
@@ -54,8 +55,9 @@ public class FormItemActivity extends AppCompatActivity {
         }
     }
 
-    public void Register(){
+    public void Register(View view){
         if(item == null){
+            item = new Item();
             item.setName(name.getText().toString());
             item.setDescription(description.getText().toString());
 
@@ -71,9 +73,12 @@ public class FormItemActivity extends AppCompatActivity {
         }
 
         finish();
+//        Intent ia = new Intent(this, ListItemsActivity.class);
+//        startActivity(ia);
     }
 
-    public void DeleteItem(){
+    public void DeleteItem(View view){
+        final Context _t = this;
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Atenção!")
                 .setMessage("Deseja excluir o item?")
@@ -82,7 +87,10 @@ public class FormItemActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         itemDAO.DeleteItem(item);
+
                         finish();
+//                        Intent ia = new Intent(_t, ListItemsActivity.class);
+//                        startActivity(ia);
                     }
                 }).create();
 
