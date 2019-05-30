@@ -3,7 +3,9 @@ package com.example.trabalho2.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Ratings {
+import java.io.Serializable;
+
+public class Ratings implements Serializable {
 
     @SerializedName("avgStars")
     @Expose
@@ -14,6 +16,9 @@ public class Ratings {
     @SerializedName("numberVotes")
     @Expose
     private Integer numberVotes;
+    @SerializedName("itemId")
+    @Expose
+    private Integer itemId;
 
     public Double getAvgStars() {
         return avgStars;
@@ -31,12 +36,24 @@ public class Ratings {
         this.totalPoints = totalPoints;
     }
 
+    public Integer getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
+    }
+
     public Integer getNumberVotes() {
         return numberVotes;
     }
 
     public void setNumberVotes(Integer numberVotes) {
         this.numberVotes = numberVotes;
+    }
+
+    public Ratings(){
+
     }
 
 }

@@ -3,8 +3,13 @@ package com.example.trabalho2.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Item {
+import java.io.Serializable;
 
+public class Item implements Serializable {
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -26,6 +31,14 @@ public class Item {
     @SerializedName("ratings")
     @Expose
     private Ratings ratings;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -83,4 +96,12 @@ public class Item {
         this.ratings = ratings;
     }
 
+    @Override
+    public String toString(){
+        return name;
+    }
+
+    public Item(){
+
+    }
 }

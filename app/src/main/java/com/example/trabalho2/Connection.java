@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Connection extends SQLiteOpenHelper {
 
-    private static final String name = "banco.db";
+    private static final String name = "fortnite99.db";
     private static  final int version = 1;
 
     public Connection(Context context) {
@@ -15,7 +15,9 @@ public class Connection extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table item(id string primary key, name varchar(100))");
+        db.execSQL("create table item(id integer primary key autoincrement, name varchar(100), description varchar(250))");
+        db.execSQL("create table images(id integer primary key autoincrement, icon varchar(100), item_id integer)");
+        db.execSQL("create table ratings(id integer primary key autoincrement, total_points integer, item_id integer)");
     }
 
     @Override
